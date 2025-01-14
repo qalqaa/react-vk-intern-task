@@ -3,15 +3,19 @@ import { Button } from 'primereact/button';
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
 import { observer } from 'mobx-react-lite';
 import store from './stores/store';
+import { fetchData } from './data/api';
+import { useEffect } from 'react';
 
 const App = observer(() => {
+  useEffect(() => {
+    fetchData(1).then((data) => {
+      console.log(data);
+    });
+  });
+
   return (
     <>
-      <div className={styles.container}>
-        <span>Cont:{store.count}</span>
-        <Button onClick={() => store.decrement(1)} label="-" />
-        <Button onClick={() => store.increment(1)} label="+" />
-      </div>
+      <div className={styles.container}></div>
     </>
   );
 });
