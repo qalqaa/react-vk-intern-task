@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "axios": "^1.7.9",
+        "lodash": "^4.17.21",
         "mobx": "^6.13.5",
         "mobx-react-lite": "^4.1.0",
         "primeicons": "^7.0.0",
@@ -25,6 +26,7 @@
         "@types/react": "^19.0.7",
         "@types/react-dom": "^19.0.3",
         "@vitejs/plugin-react-swc": "^3.5.0",
+        "@types/lodash": "^4.17.14",
         "eslint": "^9.17.0",
         "eslint-plugin-react-hooks": "^5.0.0",
         "eslint-plugin-react-refresh": "^0.4.16",
