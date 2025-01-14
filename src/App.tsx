@@ -1,11 +1,11 @@
 import styles from './App.module.scss';
 import { Toast, ToastMessage } from 'primereact/toast';
-import 'primereact/resources/themes/lara-dark-blue/theme.css';
 import { observer } from 'mobx-react-lite';
 import store from './stores/store';
 import { RefObject, useEffect, useRef } from 'react';
 import { Skeleton } from 'primereact/skeleton';
-import Card from './components/Card';
+import Card from './components/Card/Card';
+import Header from './components/Header/Header';
 
 const App = observer(() => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -47,6 +47,7 @@ const App = observer(() => {
 
   return (
     <>
+      <Header />
       <Toast ref={toastRef} />
       <div ref={listRef} onScroll={handleScroll} className={styles.container}>
         <ul className={styles.list}>

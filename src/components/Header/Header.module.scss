@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background-color: var(--surface-card);
+  border-bottom: 1px solid var(--surface-border);
+  padding: 1rem 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  gap: 1rem;
+  list-style-type: none;
+}

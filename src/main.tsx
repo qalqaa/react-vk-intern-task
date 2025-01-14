@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import { PrimeReactProvider } from 'primereact/api';
 import App from './App.tsx';
+import 'primeicons/primeicons.css';
+// import 'primereact/resources/themes/lara-dark-blue/theme.css';
+// import 'primereact/resources/themes/lara-light-blue/theme.css';
 
 const primeStyles = {
   ripple: true,

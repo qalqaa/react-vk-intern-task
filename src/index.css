@@ -5,10 +5,7 @@
 
   color-scheme: light dark;
   color: var(--text-color);
-  background-color: var(--bg-color);
-  --text-color: rgba(255, 255, 255, 0.87);
-  --bg-color: #242424;
-  --bg-color-comp: #383838;
+  background-color: var(--surface-ground);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,12 +15,5 @@
 
 body {
   overflow: hidden;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --text-color: #213547;
-    --bg-color: #ffffff;
-    --bg-color-comp: #e7e7e7;
-  }
+  margin: 0;
 }
