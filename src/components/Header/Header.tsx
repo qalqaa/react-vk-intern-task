@@ -3,7 +3,8 @@ import { PrimeReactContext } from 'primereact/api';
 import styles from './Header.module.scss';
 import { ToggleButton } from 'primereact/togglebutton';
 import { FloatLabel } from 'primereact/floatlabel';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import store from '../../stores/store';
 
 const Header = () => {
   const sortOptions = [
@@ -19,6 +20,18 @@ const Header = () => {
     setThemeChecked(!themeChecked);
   };
 
+  const handleSort = (event: DropdownChangeEvent) => {
+    setSort(event.value);
+  };
+
+  useEffect(() => {
+    if (sort.code === 'name') {
+      store.sortItemsByName();
+    } else if (sort.code === 'author') {
+      store.sortItemsByAuthor();
+    }
+  }, [sort]);
+
   useEffect(() => {
     const linkElementId = 'theme-link';
     const linkElement = document.getElementById(linkElementId);
@@ -32,10 +45,14 @@ const Header = () => {
       }
   }, [changeTheme, themeChecked]);
 
+  useEffect(() => {
+    store.sortItemsByName();
+  }, []);
+
   return (
     <header className={styles.header}>
       <a href="/">
-        <img src="/vk.svg" alt="" />
+        <img src="/vk.svg" alt="vk_logo" />
       </a>
       <ul className={styles.list}>
         <li>
@@ -44,7 +61,7 @@ const Header = () => {
               <Dropdown
                 inputId="dd-city"
                 value={sort}
-                onChange={(e) => setSort(e.value)}
+                onChange={(event) => handleSort(event)}
                 options={sortOptions}
                 optionLabel="name"
                 className="w-full"

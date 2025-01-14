@@ -47,6 +47,14 @@ class Store {
     }
   }
 
+  sortItemsByName = () => {
+    this.items.sort((a, b) => a.name.localeCompare(b.name));
+  };
+
+  sortItemsByAuthor = () => {
+    this.items.sort((a, b) => a.owner.login.localeCompare(b.owner.login));
+  };
+
   removeItem(id: IRepository['id']) {
     this.items = this.items.filter((item) => item.id !== id);
   }
