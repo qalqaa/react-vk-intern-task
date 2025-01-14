@@ -6,4 +6,31 @@
   border-radius: 0.5rem;
   background-color: var(--surface-card);
   border: 1px solid var(--surface-border);
+
+  .author {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 100%;
+    }
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    .visit {
+      width: 100%;
+    }
+    .delete {
+      width: 100%;
+    }
+    .edit {
+      width: 100%;
+    }
+  }
 }

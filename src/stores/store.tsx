@@ -30,7 +30,9 @@ class Store {
     this.toggleLoading();
     try {
       const newItems = await fetchData(this.currentPage, this.itemsPerPage);
+
       this.setNewItems(newItems);
+      this.sortItemsByName();
       this.currentPage += 1;
     } catch (error) {
       if (error instanceof AxiosError) {

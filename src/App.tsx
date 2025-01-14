@@ -15,7 +15,7 @@ const App = observer(() => {
   const debouncedHandleScroll = debounce(() => {
     if (listRef.current) {
       const { scrollHeight, scrollTop, clientHeight } = listRef.current;
-      const bottom = scrollHeight === scrollTop + clientHeight;
+      const bottom = scrollHeight - 50 <= scrollTop + clientHeight;
 
       if (bottom && !store.loading) {
         store.fetchItems();
@@ -72,6 +72,9 @@ const App = observer(() => {
               key={item.id}
               id={item.id}
               name={item.name}
+              avatar_url={item.owner.avatar_url}
+              created_at={item.created_at}
+              html_url={item.html_url}
               ownerName={item.owner.login}
               description={item.description}
               onDelete={() => store.removeItem(item.id)}

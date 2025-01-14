@@ -45,10 +45,6 @@ const Header = () => {
       }
   }, [changeTheme, themeChecked]);
 
-  useEffect(() => {
-    store.sortItemsByName();
-  }, []);
-
   return (
     <header className={styles.header}>
       <a href="/">
