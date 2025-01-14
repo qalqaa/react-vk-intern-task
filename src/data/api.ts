@@ -1,7 +1,18 @@
-export const fetchData = async (page: number) => {
-  const response = await fetch(
-    `https://api.github.com/search/repositories?q=javascript&sort=stars&order=asc&page=${page}`,
-  );
-  const data = await response.json();
-  return data.items;
+import axios, { AxiosError } from 'axios';
+
+export const fetchData = async (page: number, perPage: number) => {
+  try {
+    const response = await axios.get(
+      `https://api.github.com/search/repositories?q=javascript&sort=stars&order=asc&page=${page}&per_page=${perPage}`,
+    );
+    return response.data.items;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(`Error ${error.code}:`, error.message);
+      throw error;
+    } else {
+      console.error('Unexpected error:', error);
+      throw error;
+    }
+  }
 };

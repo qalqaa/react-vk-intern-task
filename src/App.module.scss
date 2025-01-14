@@ -1,0 +1,19 @@
+.container {
+  max-height: 100vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.list {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.skeleton {
+  max-width: 1280px;
+  margin: 0 auto;
+}
