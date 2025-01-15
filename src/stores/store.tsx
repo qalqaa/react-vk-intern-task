@@ -1,11 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 import { fetchData } from '../data/api';
-import { IRepository } from '../model/store';
+import { IRepository, Sort } from '../model/store';
 import { AxiosError } from 'axios';
 import { ICardProps } from '../model/card';
 
 class Store {
   items: IRepository[] = [];
+  sort: Sort = 'stars';
   currentPage: number = 1;
   loading: boolean = false;
   error: string | null = null;
@@ -27,13 +28,21 @@ class Store {
     this.error = message;
   }
 
+  setSort(sort: Sort) {
+    this.sort = sort;
+    this.items = [];
+    this.fetchItems();
+  }
+
   async fetchItems() {
     this.toggleLoading();
     try {
-      const newItems = await fetchData(this.currentPage, this.itemsPerPage);
-
+      const newItems = await fetchData(
+        this.currentPage,
+        this.itemsPerPage,
+        this.sort,
+      );
       this.setNewItems(newItems);
-      this.sortItemsByName();
       this.currentPage += 1;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -49,14 +58,6 @@ class Store {
       this.toggleLoading();
     }
   }
-
-  sortItemsByName = () => {
-    this.items.sort((a, b) => a.name.localeCompare(b.name));
-  };
-
-  sortItemsByAuthor = () => {
-    this.items.sort((a, b) => a.owner.login.localeCompare(b.owner.login));
-  };
 
   removeItem(id: IRepository['id']) {
     this.items = this.items.filter((item) => item.id !== id);

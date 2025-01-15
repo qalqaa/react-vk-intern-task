@@ -5,14 +5,19 @@ import { ToggleButton } from 'primereact/togglebutton';
 import { FloatLabel } from 'primereact/floatlabel';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import store from '../../stores/store';
+import { Sort } from '../../model/store';
 
 const Header = () => {
-  const sortOptions = [
-    { name: 'По имени', code: 'name' },
-    { name: 'По автору', code: 'author' },
+  const sortOptions: { name: string; code: Sort }[] = [
+    { name: 'По кол-ву звезд', code: 'stars' },
+    { name: 'По кол-ву forks', code: 'forks' },
+    { name: 'По кол-ву issues', code: 'help-wanted-issues' },
+    { name: 'По дате обновления', code: 'updated' },
   ];
   const [themeChecked, setThemeChecked] = useState(false);
-  const [sort, setSort] = useState(sortOptions[0]);
+  const [sort, setSort] = useState(
+    sortOptions.find((item) => item.code === store.sort) || sortOptions[0],
+  );
 
   const { changeTheme } = useContext(PrimeReactContext);
 
@@ -22,15 +27,8 @@ const Header = () => {
 
   const handleSort = (event: DropdownChangeEvent) => {
     setSort(event.value);
+    store.setSort(sort.code);
   };
-
-  useEffect(() => {
-    if (sort.code === 'name') {
-      store.sortItemsByName();
-    } else if (sort.code === 'author') {
-      store.sortItemsByAuthor();
-    }
-  }, [sort]);
 
   useEffect(() => {
     const linkElementId = 'theme-link';
@@ -62,7 +60,7 @@ const Header = () => {
                 optionLabel="name"
                 className="w-full"
               />
-              <label htmlFor="dd-city">Отфильтровать</label>
+              <label htmlFor="dd-city">Отсортировать</label>
             </FloatLabel>
           </div>
         </li>

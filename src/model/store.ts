@@ -102,3 +102,5 @@ interface Owner {
   user_view_type: string;
   site_admin: boolean;
 }
+
+export type Sort = 'stars' | 'forks' | 'help-wanted-issues' | 'updated';
