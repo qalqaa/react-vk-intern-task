@@ -1,50 +1,23 @@
-# React + TypeScript + Vite
+# Как запустить проект
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Т.к я не хочу давать свои креды от GH в общий доступ я их спрятал в .env файле, который добавил в .gitignore.
 
-Currently, two official plugins are available:
+1. Зайти в настройки своего профиля на GitHub
+2. В самом низу списка настроек будет вкладка **Developer Settings**, нажать на нее
+3. Перейти в вкладку **OAuth Apps**
+4. Создать Oauth App с
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   Homepage URL = http://localhost:5173
 
-## Expanding the ESLint configuration
+   Authorization callback URL = http://localhost:5173/callback
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+5. Создать **Client Secret**
+6. Перейти в склонированный репозиторий и создать **.env** файл
+7. Скопировать из созданного oAuth приложения **ClientID** и **Client Secret**
+8. И назвать их следующим образом 👇
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
+VITE_CLIENT_ID=[ClientID]
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+VITE_CLIENT_SECRET=[ClientSecret]
 ```
