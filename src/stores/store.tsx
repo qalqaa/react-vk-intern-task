@@ -11,9 +11,15 @@ class Store {
   loading: boolean = false;
   error: string | null = null;
   itemsPerPage: number = 30;
+  accessToken: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
+    this.accessToken = localStorage.getItem('access_token');
+  }
+
+  setAccessToken(token: string) {
+    this.accessToken = token;
   }
 
   toggleLoading() {

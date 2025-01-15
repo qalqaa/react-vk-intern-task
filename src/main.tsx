@@ -4,8 +4,8 @@ import './index.css';
 import { PrimeReactProvider } from 'primereact/api';
 import App from './App.tsx';
 import 'primeicons/primeicons.css';
-// import 'primereact/resources/themes/lara-dark-blue/theme.css';
-// import 'primereact/resources/themes/lara-light-blue/theme.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Callback from './components/Callback/Callback.tsx';
 
 const primeStyles = {
   ripple: true,
@@ -14,7 +14,12 @@ const primeStyles = {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <PrimeReactProvider value={primeStyles}>
-      <App />
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/callback" element={<Callback />} />
+        </Routes>
+      </Router>
     </PrimeReactProvider>
   </StrictMode>,
 );

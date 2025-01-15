@@ -6,6 +6,9 @@ import { FloatLabel } from 'primereact/floatlabel';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import store from '../../stores/store';
 import { Sort } from '../../model/store';
+import { Button } from 'primereact/button';
+import { goToGithub } from '../../data/api';
+import { Message } from 'primereact/message';
 
 const Header = () => {
   const sortOptions: { name: string; code: Sort }[] = [
@@ -30,6 +33,10 @@ const Header = () => {
     store.setSort(sort.code);
   };
 
+  const handleAuth = () => {
+    goToGithub();
+  };
+
   useEffect(() => {
     const linkElementId = 'theme-link';
     const linkElement = document.getElementById(linkElementId);
@@ -45,36 +52,47 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <a href="/">
-        <img src="/vk.svg" alt="vk_logo" />
-      </a>
-      <ul className={styles.list}>
-        <li>
-          <div className="card flex justify-content-center">
-            <FloatLabel>
-              <Dropdown
-                inputId="dd-city"
-                value={sort}
-                onChange={(event) => handleSort(event)}
-                options={sortOptions}
-                optionLabel="name"
-                className="w-full"
-              />
-              <label htmlFor="dd-city">Отсортировать</label>
-            </FloatLabel>
-          </div>
-        </li>
-        <li>
-          <ToggleButton
-            checked={themeChecked}
-            onLabel=""
-            aria-label="Toggle theme"
-            onIcon="pi pi-sun"
-            offIcon="pi pi-moon"
-            onChange={() => handleThemeChange()}
-          />
-        </li>
-      </ul>
+      <div className={styles['left-content']}>
+        <a href="/">
+          <img src="/vk.svg" alt="vk_logo" />
+        </a>
+        <ul className={styles.list}>
+          <li>
+            <div className="card flex justify-content-center">
+              <FloatLabel>
+                <Dropdown
+                  inputId="dd-city"
+                  value={sort}
+                  onChange={(event) => handleSort(event)}
+                  options={sortOptions}
+                  optionLabel="name"
+                  className="w-full"
+                />
+                <label htmlFor="dd-city">Отсортировать</label>
+              </FloatLabel>
+            </div>
+          </li>
+          <li>
+            <ToggleButton
+              checked={themeChecked}
+              onLabel=""
+              aria-label="Toggle theme"
+              onIcon="pi pi-sun"
+              offIcon="pi pi-moon"
+              onChange={() => handleThemeChange()}
+            />
+          </li>
+        </ul>
+      </div>
+      {!store.accessToken ? (
+        <Button
+          onClick={() => handleAuth()}
+          icon="pi pi-github"
+          label="Авторизоваться"
+        />
+      ) : (
+        <Message severity="success" text="Вы авторизованы" />
+      )}
     </header>
   );
 };

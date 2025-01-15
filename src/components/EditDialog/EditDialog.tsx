@@ -4,15 +4,9 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import styles from './EditDialog.module.scss';
 import store from '../../stores/store';
-import { ICardProps } from '../../model/card';
+import { IEditDialogProps } from '../../model/editDialog';
 
-interface EditDialogProps {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  item: ICardProps;
-}
-
-const EditDialog = (props: EditDialogProps) => {
+const EditDialog = (props: IEditDialogProps) => {
   const { visible, setVisible, item } = props;
   const [name, setName] = useState<string>(item.name);
   const [ownerName, setOwnerName] = useState<string>(item.ownerName || '');

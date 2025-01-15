@@ -7,15 +7,21 @@
   border-bottom: 1px solid var(--surface-border);
   padding: 1rem 3rem;
   display: flex;
-  gap: 3rem;
+  justify-content: space-between;
   align-items: center;
-}
 
-.list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  gap: 1rem;
-  list-style-type: none;
+  .list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 1rem;
+    list-style-type: none;
+  }
+
+  .left-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
