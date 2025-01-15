@@ -1,30 +1,21 @@
 import { Button } from 'primereact/button';
 import styles from './Card.module.scss';
+import EditDialog from '../EditDialog/EditDialog';
+import { useState } from 'react';
+import { ICardProps } from '../../model/card';
 
-interface ICardProps {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  created_at: Date;
-  ownerName?: string;
-  avatar_url: string;
-
-  onDelete: () => void;
-  onEdit: () => void;
-}
-
-const Card = ({
-  id,
-  name,
-  ownerName,
-  description,
-  avatar_url,
-  html_url,
-  created_at,
-  onDelete,
-  onEdit,
-}: ICardProps) => {
+const Card = (props: ICardProps) => {
+  const {
+    id,
+    name,
+    ownerName,
+    description,
+    avatar_url,
+    html_url,
+    created_at,
+    onDelete,
+  } = props;
+  const [visible, setVisible] = useState(false);
   const formattedDate = created_at
     .toString()
     .split('T')
@@ -33,6 +24,7 @@ const Card = ({
     .join('/');
   return (
     <div className={styles.container} key={id}>
+      <EditDialog visible={visible} setVisible={setVisible} item={props} />
       <div className={styles.content}>
         <h2 className={styles.title}>{name}</h2>
         <div className={styles.author}>
@@ -45,25 +37,25 @@ const Card = ({
           <p>{ownerName}</p>
         </div>
         {description && <p>{description}</p>}
-        <p>Created: {formattedDate}</p>
+        <p>Создан: {formattedDate}</p>
       </div>
       <div className={styles.actions}>
         <Button
           className={styles.visit}
-          label="Visit Repository"
+          label="Перейти на страницу"
           icon="pi pi-github"
           onClick={() => window.open(html_url, '_blank')}
         ></Button>
         <Button
           className={styles.edit}
-          label="Edit"
+          label="Изменить"
           icon="pi pi-pencil"
-          onClick={onEdit}
+          onClick={() => setVisible(true)}
         />
         <Button
           className={styles.delete}
           icon="pi pi-trash"
-          label="Delete"
+          label="Удалить"
           outlined
           severity="danger"
           onClick={onDelete}

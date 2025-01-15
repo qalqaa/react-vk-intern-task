@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { fetchData } from '../data/api';
 import { IRepository } from '../model/store';
 import { AxiosError } from 'axios';
+import { ICardProps } from '../model/card';
 
 class Store {
   items: IRepository[] = [];
@@ -61,10 +62,24 @@ class Store {
     this.items = this.items.filter((item) => item.id !== id);
   }
 
-  updateItem(id: IRepository['id'], updatedItem: IRepository) {
+  updateItem(
+    id: IRepository['id'],
+    updatedItem: Pick<ICardProps, 'name' | 'ownerName' | 'description'>,
+  ) {
     const index = this.items.findIndex((item) => item.id === id);
+    const item = this.items[index];
     if (index !== -1) {
-      this.items[index] = updatedItem;
+      this.items[index] = {
+        ...item,
+        name: updatedItem.name,
+        owner: {
+          ...item.owner,
+          login: updatedItem.ownerName
+            ? updatedItem.ownerName
+            : item.owner.login,
+        },
+        description: updatedItem.description,
+      };
     }
   }
 }

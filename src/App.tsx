@@ -65,6 +65,7 @@ const App = observer(() => {
     <>
       <Header />
       <Toast ref={toastRef} />
+
       <div ref={listRef} className={styles.container}>
         <ul className={styles.list}>
           {store.items.map((item) => (
@@ -78,9 +79,6 @@ const App = observer(() => {
               ownerName={item.owner.login}
               description={item.description}
               onDelete={() => store.removeItem(item.id)}
-              onEdit={() =>
-                store.updateItem(item.id, { ...item, name: 'Updated' })
-              }
             />
           ))}
           {store.loading &&

@@ -53,7 +53,7 @@ const Header = () => {
       <ul className={styles.list}>
         <li>
           <div className="card flex justify-content-center">
-            <FloatLabel className="w-full md:w-14rem">
+            <FloatLabel>
               <Dropdown
                 inputId="dd-city"
                 value={sort}
@@ -62,7 +62,7 @@ const Header = () => {
                 optionLabel="name"
                 className="w-full"
               />
-              <label htmlFor="dd-city">Filter by</label>
+              <label htmlFor="dd-city">Отфильтровать</label>
             </FloatLabel>
           </div>
         </li>
