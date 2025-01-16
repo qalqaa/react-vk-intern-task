@@ -25,3 +25,17 @@
     gap: 1rem;
   }
 }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .left-content {
+    width: inherit;
+    justify-content: space-between;
+  }
+  .auth {
+    width: inherit;
+  }
+}

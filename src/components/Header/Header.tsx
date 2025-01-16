@@ -66,7 +66,7 @@ const Header = () => {
                   onChange={(event) => handleSort(event)}
                   options={sortOptions}
                   optionLabel="name"
-                  className="w-full"
+                  className={styles.dropdown}
                 />
                 <label htmlFor="dd-city">Отсортировать</label>
               </FloatLabel>
@@ -86,12 +86,17 @@ const Header = () => {
       </div>
       {!store.accessToken ? (
         <Button
+          className={styles.auth}
           onClick={() => handleAuth()}
           icon="pi pi-github"
           label="Авторизоваться"
         />
       ) : (
-        <Message severity="success" text="Вы авторизованы" />
+        <Message
+          className={styles.auth}
+          severity="success"
+          text="Вы авторизованы"
+        />
       )}
     </header>
   );

@@ -34,3 +34,9 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  .actions {
+    flex-direction: column;
+  }
+}
