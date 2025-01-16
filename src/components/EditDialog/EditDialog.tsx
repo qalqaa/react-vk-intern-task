@@ -14,6 +14,10 @@ const EditDialog = (props: IEditDialogProps) => {
     item.description || '',
   );
 
+  const handleVisible = () => {
+    setVisible(!visible);
+  };
+
   const handleSubmit = () => {
     setVisible(false);
     store.updateItem(item.id, {
@@ -27,10 +31,7 @@ const EditDialog = (props: IEditDialogProps) => {
       header="Изменение карточки репозитория"
       visible={visible}
       style={{ width: '30vw' }}
-      onHide={() => {
-        if (!visible) return;
-        setVisible(false);
-      }}
+      onHide={() => handleVisible()}
     >
       <div className={styles.inputs}>
         <label htmlFor="username">Название репозитория</label>

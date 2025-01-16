@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { fetchData } from '../data/api';
 import { IRepository, Sort } from '../model/store';
-import { AxiosError } from 'axios';
 import { ICardProps } from '../model/card';
 
 class Store {
@@ -51,15 +50,7 @@ class Store {
       this.setNewItems(newItems);
       this.currentPage += 1;
     } catch (error) {
-      if (error instanceof AxiosError) {
-        const errorMessage =
-          error.response?.data?.message ||
-          error.message ||
-          'Failed to fetch data';
-        this.setError(`Error: ${errorMessage}`);
-      } else {
-        this.setError('Unexpected error occurred');
-      }
+      this.setError(`Error: ${error}`);
     } finally {
       this.toggleLoading();
     }

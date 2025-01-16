@@ -16,12 +16,7 @@ const Card = (props: ICardProps) => {
     onDelete,
   } = props;
   const [visible, setVisible] = useState(false);
-  const formattedDate = created_at
-    .toString()
-    .split('T')
-    .shift()
-    ?.split('-')
-    .join('/');
+  const formattedDate = new Date(created_at).toLocaleDateString('en-GB');
   return (
     <div className={styles.container} key={id}>
       <EditDialog visible={visible} setVisible={setVisible} item={props} />
