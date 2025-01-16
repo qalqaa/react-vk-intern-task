@@ -7,6 +7,7 @@ import { Toast, ToastMessage } from 'primereact/toast';
 import { Skeleton } from 'primereact/skeleton';
 import Card from './components/Card/Card';
 import Header from './components/Header/Header';
+import ContactFooter from './components/ContactFooter/ContactFooter';
 
 const App = observer(() => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -91,6 +92,7 @@ const App = observer(() => {
             ))}
         </ul>
       </div>
+      <ContactFooter />
     </>
   );
 });
