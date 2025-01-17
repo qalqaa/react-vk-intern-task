@@ -8,7 +8,7 @@ class EventEmitter {
     this.listeners.get(eventName)?.push(listener);
   }
 
-  emit(eventName: string, ...args: Array<Object>): void {
+  emit(eventName: string, ...args: any[]): void {
     const eventListeners = this.listeners.get(eventName);
     if (eventListeners) {
       eventListeners.forEach((listener) => listener(...args));
@@ -28,15 +28,26 @@ const emitter = new EventEmitter();
 
 // Подписка
 const logData = (data) => console.log(data);
-const logData2 = (data) => console.log(data.map((item) => item.message));
+const logDataSecond = (data) => console.log(data.map((item) => item.message));
 emitter.on('data', logData);
-emitter.on('data', logData2);
 
 // Испускание события
-emitter.emit('data', [
-  { message: 'Hello, world!' },
-  { message: 'Hello, world1!' },
-]);
+emitter.emit('data', { message: 'Hello, world!' });
 
 // Удаление конкретного обработчика
 emitter.off('data', logData);
+
+//
+
+// Подписка
+emitter.on('dataSecond', logData);
+emitter.on('dataSecond', logDataSecond);
+
+// Испускание события
+emitter.emit('dataSecond', [
+  { message: 'SsssHello, world!' },
+  { message: 'ssssHello, world!' },
+]);
+
+// Удаление конкретного обработчика
+emitter.off('dataSecond', logData);
