@@ -5,34 +5,21 @@ class EventEmitter {
     if (!this.listeners.has(eventName)) {
       this.listeners.set(eventName, []);
     }
-    const listenersForEvent = this.listeners.get(eventName)!;
-    listenersForEvent.push(listener);
+    this.listeners.get(eventName)?.push(listener);
   }
 
-  emit(eventName: string, ...args: any[]): void {
-    const listenersForEvent = this.listeners.get(eventName);
-    if (!listenersForEvent || listenersForEvent.length === 0) {
-      return;
-    }
-
-    for (const listener of listenersForEvent) {
-      listener(...args);
+  emit(eventName: string, ...args: Array<Object>): void {
+    const eventListeners = this.listeners.get(eventName);
+    if (eventListeners) {
+      eventListeners.forEach((listener) => listener(...args));
     }
   }
 
   off(eventName: string, listener: Function): void {
-    const listenersForEvent = this.listeners.get(eventName);
-    if (!listenersForEvent) {
-      return;
-    }
-
-    this.listeners.set(
-      eventName,
-      listenersForEvent.filter((l) => l !== listener),
-    );
-
-    if (this.listeners.get(eventName)!.length === 0) {
-      this.listeners.delete(eventName);
+    if (this.listeners[eventName]) {
+      this.listeners[eventName] = this.listeners[eventName].filter(
+        (registeredListener) => registeredListener !== listener,
+      );
     }
   }
 }
@@ -41,10 +28,15 @@ const emitter = new EventEmitter();
 
 // Подписка
 const logData = (data) => console.log(data);
+const logData2 = (data) => console.log(data.map((item) => item.message));
 emitter.on('data', logData);
+emitter.on('data', logData2);
 
 // Испускание события
-emitter.emit('data', { message: 'Hello, world!' });
+emitter.emit('data', [
+  { message: 'Hello, world!' },
+  { message: 'Hello, world1!' },
+]);
 
 // Удаление конкретного обработчика
 emitter.off('data', logData);
