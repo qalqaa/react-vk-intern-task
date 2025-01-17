@@ -8,7 +8,7 @@ class EventEmitter {
     this.listeners.get(eventName)?.push(listener);
   }
 
-  emit(eventName: string, ...args: any[]): void {
+  emit<T>(eventName: string, ...args: T extends any[] ? [T] : [T | T[]]): void {
     const eventListeners = this.listeners.get(eventName);
     if (eventListeners) {
       eventListeners.forEach((listener) => listener(...args));
