@@ -29,8 +29,9 @@ const Header = () => {
   };
 
   const handleSort = (event: DropdownChangeEvent) => {
-    setSort(event.value);
-    store.setSort(sort.code);
+    const newSort = event.value;
+    setSort(newSort);
+    store.setSort(newSort.code);
   };
 
   const handleAuth = () => {
