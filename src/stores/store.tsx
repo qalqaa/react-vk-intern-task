@@ -36,6 +36,7 @@ class Store {
   setSort(sort: Sort) {
     this.sort = sort;
     this.items = [];
+    this.currentPage = 1;
     this.fetchItems();
   }
 
