@@ -14,7 +14,7 @@ const Header = () => {
   const sortOptions: { name: string; code: Sort }[] = [
     { name: 'По кол-ву звезд', code: 'stars' },
     { name: 'По кол-ву forks', code: 'forks' },
-    { name: 'По кол-ву issues', code: 'help-wanted-issues' },
+    { name: 'По кол-ву Help Wanted Issues', code: 'help-wanted-issues' },
     { name: 'По дате обновления', code: 'updated' },
   ];
   const [themeChecked, setThemeChecked] = useState(false);

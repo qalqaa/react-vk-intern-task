@@ -79,6 +79,9 @@ const App = observer(() => {
               html_url={item.html_url}
               ownerName={item.owner.login}
               description={item.description}
+              updated_at={item.updated_at}
+              stargazers_count={item.stargazers_count}
+              forks_count={item.forks_count}
               onDelete={() => store.removeItem(item.id)}
             />
           ))}

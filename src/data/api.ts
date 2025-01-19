@@ -8,7 +8,7 @@ export const fetchData = async (
   const token = store.accessToken || localStorage.getItem('access_token');
   const url = `https://api.github.com/search/repositories?q=javascript${
     sort ? `&sort=${sort}` : ''
-  }&order=asc&page=${page}&per_page=${perPage}`;
+  }&order=desc&page=${page}&per_page=${perPage}`;
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',

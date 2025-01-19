@@ -12,6 +12,9 @@ describe('Card Component', () => {
     avatar_url: 'https://example.com/avatar.jpg',
     html_url: 'https://example.com',
     created_at: new Date('2022-11-16T05:58:46Z'),
+    updated_at: new Date('2022-11-16T05:58:46Z'),
+    stargazers_count: 100,
+    forks_count: 50,
     onDelete: jest.fn(),
   };
 

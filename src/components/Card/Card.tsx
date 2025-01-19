@@ -13,10 +13,16 @@ const Card = (props: ICardProps) => {
     avatar_url,
     html_url,
     created_at,
+    updated_at,
+    stargazers_count,
+    forks_count,
     onDelete,
   } = props;
   const [visible, setVisible] = useState(false);
-  const formattedDate = new Date(created_at).toLocaleDateString('en-GB');
+  const dateFormatter = (date: Date) =>
+    new Date(date).toLocaleDateString('en-GB');
+  const formattedCreationDate = dateFormatter(created_at);
+  const formattedUpdateDate = dateFormatter(updated_at);
   return (
     <div className={styles.container} key={id}>
       <EditDialog visible={visible} setVisible={setVisible} item={props} />
@@ -32,7 +38,12 @@ const Card = (props: ICardProps) => {
           <p>{ownerName}</p>
         </div>
         {description && <p>{description}</p>}
-        <p>Создан: {formattedDate}</p>
+        <p>Создан: {formattedCreationDate}</p>
+        <p>Обновлен: {formattedUpdateDate}</p>
+        <p>
+          <i className="pi pi-star"></i> Звезд: {stargazers_count}
+        </p>
+        <p>Количество forks: {forks_count}</p>
       </div>
       <div className={styles.actions}>
         <Button
